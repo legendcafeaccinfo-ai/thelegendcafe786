@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legend Cafe — Digital Menu Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#171310;
+    --black-2:#211b16;
+    --orange:#F5900E;
+    --orange-deep:#E85D04;
+    --red:#D62839;
+    --red-deep:#A81E2C;
+    --cream:#FFF3E2;
+    --cream-dim:#E9D9C4;
+    --olive:#5B6B2F;
+    --card-radius:22px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 20% 0%, #2a2118 0%, transparent 45%),
+      radial-gradient(circle at 90% 10%, #241b12 0%, transparent 40%),
+      var(--black);
+    font-family:'Poppins', sans-serif;
+    color:var(--cream);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 60px;
+  }
+  .card{
+    width:100%;
+    max-width:460px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(23,19,16,0) 0%, rgba(23,19,16,.85) 78%),
+      linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 60%, var(--red) 130%);
+    border-radius:var(--card-radius);
+    padding:30px 22px 22px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 18px 40px -14px rgba(0,0,0,.6);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.15) 1.5px, transparent 1.5px);
+    background-size:16px 16px;
+    opacity:.25;
+    pointer-events:none;
+  }
+  .brand-mark{
+    display:flex; align-items:center; gap:10px; position:relative;
+  }
+  .heart{ font-size:22px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.4)); }
+  .urdu{ font-size:20px; font-weight:700; color:var(--black); letter-spacing:1px; }
+  .cafe-name{
+    font-family:'Anton', sans-serif;
+    font-size:46px;
+    line-height:.95;
+    color:var(--black);
+    margin-top:10px;
+    letter-spacing:.5px;
+    position:relative;
+  }
+  .cafe-name span{ display:block; color:#fff; text-shadow:0 2px 0 var(--red-deep); }
+  .tagline{
+    margin-top:8px;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--black);
+    display:flex; gap:6px; flex-wrap:wrap;
+    position:relative;
+  }
+  .tagline em{ font-style:normal; opacity:.55; }
+  .contact-block{
+    margin-top:16px;
+    background:rgba(23,19,16,.82);
+    border-radius:14px;
+    padding:12px 14px;
+    font-size:12.5px;
+    line-height:1.55;
+    position:relative;
+  }
+  .contact-block .row{ display:flex; gap:8px; align-items:flex-start; }
+  .contact-block .row + .row{ margin-top:4px; }
+  .contact-block .ic{ opacity:.8; }
+  .badge-delivery{
+    display:inline-block;
+    margin-top:10px;
+    background:var(--red);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:999px;
+    position:relative;
+    letter-spacing:.3px;
+  }
+
+  /* ---------- QUICK ACTIONS ---------- */
+  .actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-top:16px;
+  }
+  .action-btn{
+    background:var(--black-2);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:14px;
+    padding:12px 6px 10px;
+    text-align:center;
+    text-decoration:none;
+    color:var(--cream);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .action-btn .a-ic{ font-size:19px; }
+  .action-btn span.lbl{ font-size:10.5px; font-weight:600; color:var(--cream-dim); }
+  .action-btn:active{ transform:scale(.95); }
+  .action-btn.whatsapp{ background:linear-gradient(135deg,#25D366,#128C4E); color:#fff; }
+  .action-btn.whatsapp span.lbl{ color:#fff; }
+  .action-btn.call{ background:linear-gradient(135deg, var(--orange), var(--orange-deep)); color:var(--black); }
+  .action-btn.call span.lbl{ color:var(--black); font-weight:700; }
+
+  /* ---------- CATEGORY GRID ---------- */
+  .section-title{
+    margin:26px 4px 12px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--cream-dim);
+    display:flex; align-items:center; gap:8px;
+  }
+  .section-title::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, rgba(255,255,255,.18), transparent);
+  }
+  .cat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .cat-btn{
+    background:var(--black-2);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;
+    padding:14px 12px;
+    display:flex; align-items:center; gap:10px;
+    cursor:pointer;
+    text-align:left;
+    color:var(--cream);
+    font-family:inherit;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .cat-btn .c-ic{
+    width:36px; height:36px; border-radius:10px;
+    background:linear-gradient(135deg, var(--orange), var(--orange-deep));
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; flex:none;
+  }
+  .cat-btn.deal .c-ic{ background:linear-gradient(135deg, var(--red), var(--red-deep)); }
+  .cat-btn .c-txt{ display:flex; flex-direction:column; gap:1px; }
+  .cat-btn .c-txt b{ font-size:13px; font-weight:700; }
+  .cat-btn .c-txt small{ font-size:10px; color:var(--cream-dim); font-weight:500; }
+  .cat-btn.open{ border-color:var(--orange); background:#28201a; }
+  .cat-btn.deal.open{ border-color:var(--red); }
+
+  /* ---------- PANEL ---------- */
+  .panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    grid-column:1 / -1;
+  }
+  .panel-inner{
+    background:var(--black-2);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;
+    padding:14px 14px 6px;
+    margin-top:-2px;
+  }
+  .grp-title{
+    font-size:11px; font-weight:700; letter-spacing:.3px;
+    color:var(--orange);
+    margin:4px 0 8px;
+  }
+  .grp-title.red{ color:var(--red); }
+  .item-row{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px dashed rgba(255,255,255,.08);
+  }
+  .item-row:last-child{ border-bottom:none; }
+  .item-name{ font-size:13px; font-weight:600; }
+  .item-desc{ font-size:10.5px; color:var(--cream-dim); margin-top:2px; line-height:1.4; }
+  .item-right{ display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex:none; }
+  .item-price{
+    font-size:13px; font-weight:700; color:var(--orange);
+    white-space:nowrap;
+  }
+  .item-price.red{ color:var(--red); }
+
+  /* ---------- BUY BUTTONS ---------- */
+  .buy-btn{
+    font-family:inherit;
+    border:1px solid rgba(37,211,102,.5);
+    background:rgba(37,211,102,.12);
+    color:#4be27f;
+    font-size:10.5px;
+    font-weight:700;
+    padding:5px 10px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .buy-btn:active{ transform:scale(.93); }
+  .buy-btn.added{
+    background:#25D366; color:#fff; border-color:#25D366;
+  }
+  table.sized-table .buy-btn.table-buy{
+    display:flex; align-items:center; gap:4px; justify-content:center;
+    font-size:11px; padding:5px 7px; width:100%;
+    color:var(--orange); border-color:rgba(245,144,14,.4); background:rgba(245,144,14,.1);
+  }
+  table.sized-table .buy-btn.table-buy .buy-plus{
+    background:rgba(37,211,102,.9); color:#fff; border-radius:50%;
+    width:13px; height:13px; font-size:10px; line-height:13px; display:inline-block;
+  }
+  table.sized-table .buy-btn.table-buy.added{ color:#fff; background:#25D366; border-color:#25D366; }
+  .deal-card{ position:relative; }
+  .deal-buy{
+    display:block; width:100%; margin-top:9px;
+    padding:8px 10px; font-size:11.5px;
+  }
+  .buy-btn{ position:relative; }
+  .buy-btn.in-cart{ background:rgba(37,211,102,.22); border-color:#25D366; color:#4be27f; }
+  table.sized-table .buy-btn.table-buy.in-cart{ background:rgba(37,211,102,.22); border-color:#25D366; color:#4be27f; }
+  .qty-badge{
+    display:none; align-items:center; justify-content:center;
+    position:absolute; top:-7px; right:-7px;
+    min-width:17px; height:17px; padding:0 3px;
+    background:var(--red); color:#fff; font-size:10px; font-weight:800;
+    border-radius:999px; border:2px solid var(--black-2);
+  }
+  @keyframes pulseAnim{
+    0%{ transform:scale(1); }
+    45%{ transform:scale(1.14); }
+    100%{ transform:scale(1); }
+  }
+  .buy-btn.pulse{ animation:pulseAnim .35s ease; }
+
+  /* ---------- SEARCH ---------- */
+  .search-wrap{
+    margin-top:22px;
+    position:relative;
+    display:flex; align-items:center;
+  }
+  .search-ic{ position:absolute; left:14px; font-size:14px; opacity:.6; }
+  .search-input{
+    width:100%; font-family:inherit;
+    background:var(--black-2); border:1px solid rgba(255,255,255,.09);
+    border-radius:14px; padding:12px 36px 12px 38px;
+    color:var(--cream); font-size:13px;
+  }
+  .search-input::placeholder{ color:var(--cream-dim); opacity:.7; }
+  .search-input:focus{ outline:none; border-color:var(--orange); }
+  .search-clear{
+    position:absolute; right:10px; border:none; background:none;
+    color:var(--cream-dim); font-size:13px; cursor:pointer; padding:6px;
+  }
+  .search-empty{
+    text-align:center; font-size:12px; color:var(--cream-dim);
+    padding:20px 0; opacity:.8;
+  }
+  .cat-btn.hidden-by-search{ display:none; }
+  .panel.hidden-by-search{ display:none; }
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed; top:18px; left:50%; transform:translateX(-50%) translateY(-140%);
+    background:#1c1611; color:var(--cream); border:1px solid rgba(37,211,102,.5);
+    padding:10px 18px; border-radius:999px; font-size:12.5px; font-weight:600;
+    box-shadow:0 10px 26px -10px rgba(0,0,0,.6);
+    z-index:100; transition:transform .3s ease; white-space:nowrap;
+  }
+  .toast.show{ transform:translateX(-50%) translateY(0); }
+
+  /* ---------- CART BAR ---------- */
+  .cart-bar{
+    position:fixed; left:0; right:0; bottom:0;
+    display:flex; justify-content:center;
+    z-index:50;
+    pointer-events:none;
+  }
+  .cart-bar-inner{
+    width:100%; max-width:460px;
+    margin:0 14px;
+    pointer-events:auto;
+    background:#1c1611;
+    border:1px solid rgba(255,255,255,.1);
+    border-bottom:none;
+    border-radius:16px 16px 0 0;
+    box-shadow:0 -10px 30px -10px rgba(0,0,0,.6);
+    transform:translateY(calc(100% - 54px));
+    transition:transform .3s ease;
+    max-height:78vh;
+    display:flex; flex-direction:column;
+  }
+  .cart-bar-inner.expanded{ transform:translateY(0); }
+  .cart-bar-inner.empty{ transform:translateY(calc(100% - 54px)) !important; }
+  .cart-bar-inner.empty .cart-summary{ cursor:default; opacity:.75; }
+  .cart-summary{
+    display:flex; align-items:center; gap:10px;
+    padding:14px 16px;
+    cursor:pointer;
+    flex:none;
+  }
+  .cart-summary .cart-ic{ font-size:18px; position:relative; }
+  .cart-badge{
+    position:absolute; top:-8px; right:-10px;
+    background:var(--red); color:#fff; font-size:10px; font-weight:800;
+    min-width:16px; height:16px; border-radius:999px;
+    display:flex; align-items:center; justify-content:center; padding:0 2px;
+  }
+  .cart-summary .cs-txt{ flex:1; display:flex; flex-direction:column; gap:1px; }
+  .cart-summary .cs-txt b{ font-size:12.5px; }
+  .cart-summary .cs-txt span{ font-size:11px; color:var(--cream-dim); }
+  .cart-summary .chev{ font-size:12px; color:var(--cream-dim); transition:transform .3s ease; }
+  .cart-bar-inner.expanded .chev{ transform:rotate(180deg); }
+  .cart-scroll{
+    overflow-y:auto;
+    padding:0 14px;
+    border-top:1px dashed rgba(255,255,255,.1);
+  }
+  .cart-list{ padding-top:4px; }
+  .cart-line{
+    display:flex; align-items:center; gap:8px;
+    padding:9px 0;
+    border-bottom:1px dashed rgba(255,255,255,.08);
+  }
+  .cart-line:last-child{ border-bottom:none; }
+  .cart-line .cl-name{ flex:1; font-size:12px; font-weight:600; }
+  .cart-line .cl-price{ font-size:11px; color:var(--cream-dim); }
+  .cart-line .cl-qty{
+    display:flex; align-items:center; gap:6px;
+    background:var(--black); border-radius:999px; padding:3px 6px;
+  }
+  .cart-line .cl-qty button{
+    width:20px; height:20px; border-radius:50%; border:none;
+    background:rgba(255,255,255,.08); color:var(--cream); font-size:13px;
+    cursor:pointer; line-height:1;
+  }
+  .cart-line .cl-qty span{ font-size:12px; min-width:14px; text-align:center; }
+  .cart-line .cl-remove{
+    border:none; background:none; color:var(--red); font-size:14px; cursor:pointer; padding:2px 4px;
+  }
+  .order-summary{
+    padding:10px 2px 4px;
+    border-bottom:1px dashed rgba(255,255,255,.1);
+    margin-bottom:8px;
+  }
+  .os-row{
+    display:flex; justify-content:space-between;
+    font-size:11.5px; color:var(--cream-dim); padding:3px 0;
+  }
+  .os-row.os-total{
+    font-size:13.5px; font-weight:800; color:#fff; padding-top:6px;
+  }
+  .order-form{ padding-bottom:6px; }
+  .of-group{ margin-bottom:9px; }
+  .of-group label{
+    display:block; font-size:10.5px; font-weight:700;
+    color:var(--cream-dim); margin-bottom:4px; letter-spacing:.2px;
+  }
+  .of-group input, .of-group textarea{
+    width:100%; font-family:inherit;
+    background:var(--black); border:1px solid rgba(255,255,255,.09);
+    border-radius:10px; padding:9px 10px; color:var(--cream); font-size:12.5px;
+    resize:vertical;
+  }
+  .of-group input:focus, .of-group textarea:focus{ outline:none; border-color:var(--orange); }
+  .of-toggle{ display:flex; gap:8px; margin-bottom:9px; }
+  .ot-btn{
+    flex:1; font-family:inherit; padding:9px 6px; font-size:12px; font-weight:700;
+    border-radius:10px; border:1px solid rgba(255,255,255,.09);
+    background:var(--black); color:var(--cream-dim); cursor:pointer;
+  }
+  .ot-btn.active{
+    background:linear-gradient(135deg, var(--orange), var(--orange-deep));
+    color:var(--black); border-color:transparent;
+  }
+  .cart-clear{
+    text-align:center; font-size:10.5px; color:var(--cream-dim);
+    text-decoration:underline; background:none; border:none; cursor:pointer;
+    padding:8px 0 2px; flex:none;
+  }
+  .cart-order-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin:8px 14px 14px;
+    background:linear-gradient(135deg,#25D366,#128C4E);
+    color:#fff; border:none; border-radius:999px;
+    padding:12px 18px; font-size:13px; font-weight:700;
+    font-family:inherit; cursor:pointer; flex:none;
+  }
+  .cart-order-btn:disabled{
+    background:#3a332b; color:var(--cream-dim); cursor:not-allowed;
+  }
+  .sized-table{ width:100%; border-collapse:collapse; margin-bottom:4px; }
+  .sized-table th{
+    font-size:9px; font-weight:600; color:var(--cream-dim);
+    padding:4px 3px; text-align:center;
+  }
+  .sized-table th:first-child{ text-align:left; }
+  .sized-table td{
+    font-size:11.5px; padding:6px 3px; text-align:center;
+    border-bottom:1px dashed rgba(255,255,255,.08);
+  }
+  .sized-table td:first-child{
+    text-align:left; font-weight:600; font-size:12.5px;
+  }
+  .sized-table td.price{ color:var(--orange); font-weight:700; }
+  .deal-card{
+    background:rgba(214,40,57,.08);
+    border:1px solid rgba(214,40,57,.35);
+    border-radius:12px;
+    padding:10px 12px;
+    margin-bottom:8px;
+  }
+  .deal-card .dh{ display:flex; justify-content:space-between; align-items:center; }
+  .deal-card .dh b{ font-size:12.5px; color:#fff; }
+  .deal-card .dh .price{ font-size:14px; font-weight:800; color:var(--red); }
+  .deal-card ul{ margin:6px 0 0 16px; padding:0; }
+  .deal-card li{ font-size:11px; color:var(--cream-dim); line-height:1.5; }
+  .note{ font-size:10px; color:var(--cream-dim); opacity:.75; text-align:center; padding:8px 0 2px; }
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    margin-top:26px;
+    text-align:center;
+  }
+  .footer .fname{ font-family:'Anton', sans-serif; font-size:20px; color:var(--orange); }
+  .footer p{ font-size:11px; color:var(--cream-dim); margin-top:4px; }
+  .share-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin:16px auto 0;
+    background:linear-gradient(135deg,#25D366,#128C4E);
+    color:#fff; border:none; border-radius:999px;
+    padding:13px 22px; font-size:13px; font-weight:700;
+    font-family:inherit; cursor:pointer; width:100%;
+    box-shadow:0 10px 24px -10px rgba(37,211,102,.55);
+  }
+  .taxes-note{ font-size:10px; text-align:center; color:var(--cream-dim); opacity:.7; margin-top:10px; }
+  .dev-credit{ font-size:10px; text-align:center; color:var(--orange); opacity:.85; margin-top:6px; font-weight:600; letter-spacing:.2px; }
+
+  @media (max-width:360px){
+    .cafe-name{ font-size:38px; }
+    .cat-grid{ grid-template-columns:1fr 1fr; }
+  }
+  body{ padding-bottom:90px; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="brand-mark">
+      <span class="heart">♥</span>
+      <span class="urdu">قصور</span>
+    </div>
+    <div class="cafe-name">LEGEND<span>CAFE</span></div>
+    <div class="tagline">
+      <span>Pizza</span><em>•</em><span>Burger</span><em>•</em><span>Steaks</span><em>•</em><span>Shakes</span>
+    </div>
+    <div class="contact-block">
+      <div class="row"><span class="ic">📍</span><span>Kot Gulam M., Near Sardar Faisal House, Kasur</span></div>
+      <div class="row"><span class="ic">📞</span><span>0327-4428800 &nbsp;/&nbsp; 0325-4428800</span></div>
+    </div>
+    <span class="badge-delivery">🛵 Free Home Delivery</span>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="actions">
+    <a class="action-btn call" href="tel:+923274428800">
+      <span class="a-ic">📞</span><span class="lbl">Call</span>
+    </a>
+    <a class="action-btn whatsapp" href="https://wa.me/923274428800?text=Hi%20Legend%20Cafe%2C%20I%27d%20like%20to%20order" target="_blank" rel="noopener">
+      <span class="a-ic">💬</span><span class="lbl">WhatsApp</span>
+    </a>
+    <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=Legend%20Cafe%20Kot%20Gulam%20Kasur" target="_blank" rel="noopener">
+      <span class="a-ic">🗺️</span><span class="lbl">Location</span>
+    </a>
+    <a class="action-btn" href="#" id="shareTop">
+      <span class="a-ic">📤</span><span class="lbl">Share</span>
+    </a>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-ic">🔍</span>
+    <input type="text" id="menuSearch" class="search-input" placeholder="Search menu (e.g. Zinger, Pizza, Wings)...">
+    <button class="search-clear" id="searchClear" style="display:none;">✕</button>
+  </div>
+  <div class="search-empty" id="searchEmpty" style="display:none;">No items match your search.</div>
+
+  <!-- CATEGORIES -->
+  <div class="section-title">Menu Categories</div>
+  <div class="cat-grid" id="catGrid"></div>
+
+  <div class="footer">
+    <div class="fname">LEGEND CAFE</div>
+    <p>Kasur's home of Pizza, Burgers, Broast &amp; more</p>
+    <button class="share-btn" id="shareBottom">
+      <span>💬</span> Send this menu on WhatsApp
+    </button>
+    <p class="taxes-note">All prices are inclusive of taxes</p>
+    <p class="dev-credit">App developed by Mian Abbas Sab</p>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<!-- CART BAR -->
+<div class="cart-bar">
+  <div class="cart-bar-inner empty" id="cartBarInner">
+    <div class="cart-summary" id="cartSummary">
+      <span class="cart-ic">🛒<span class="cart-badge" id="cartBadge" style="display:none;">0</span></span>
+      <div class="cs-txt">
+        <b id="cartCountTxt">Your cart is empty</b>
+        <span id="cartTotalTxt">Tap "+ Buy" on any item to start</span>
+      </div>
+      <span class="chev">▲</span>
+    </div>
+    <div class="cart-scroll" id="cartScroll">
+      <div class="cart-list" id="cartList"></div>
+
+      <div class="order-summary" id="orderSummary">
+        <div class="os-row"><span>Subtotal</span><span id="osSubtotal">Rs. 0</span></div>
+        <div class="os-row"><span>Tax (8%)</span><span id="osTax">Rs. 0</span></div>
+        <div class="os-row"><span>Delivery</span><span>Free</span></div>
+        <div class="os-row os-total"><span>Total</span><span id="osTotal">Rs. 0</span></div>
+      </div>
+
+      <div class="order-form">
+        <div class="of-group">
+          <label>Your Name</label>
+          <input type="text" id="custName" placeholder="e.g. Ahmed Khan">
+        </div>
+        <div class="of-group">
+          <label>Phone Number</label>
+          <input type="tel" id="custPhone" placeholder="03xx-xxxxxxx">
+        </div>
+        <div class="of-toggle" id="orderTypeToggle">
+          <button type="button" class="ot-btn active" data-type="Delivery">🛵 Delivery</button>
+          <button type="button" class="ot-btn" data-type="Takeaway">🏬 Takeaway</button>
+        </div>
+        <div class="of-group" id="addressGroup">
+          <label>Delivery Address</label>
+          <textarea id="custAddress" rows="2" placeholder="House #, Street, Area, Kasur"></textarea>
+        </div>
+        <div class="of-group">
+          <label>Order Notes (optional)</label>
+          <textarea id="custNotes" rows="2" placeholder="e.g. less spicy, extra ketchup..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button class="cart-clear" id="cartClearBtn">Clear all</button>
+    <button class="cart-order-btn" id="cartOrderBtn" disabled>💬 Send Order on WhatsApp</button>
+  </div>
+</div>
+
+<script>
+const CATS = [
+  {
+    id:'deals', label:'Deals', icon:'🎉', sub:'9 combos + family', deal:true,
+    render:()=>{
+      const deals = [
+        {n:'Deal 1', items:['1 Small Pizza (any regular)','1 Regular Fries','1 · 345ml Drink'], price:'Rs. 960'},
+        {n:'Deal 2', items:['1 Zinger Burger','1 Regular Fries','1 · 345ml Drink'], price:'Rs. 750'},
+        {n:'Deal 3', items:['1 Medium Kabab Crust Pizza','5 Fried Wings','1 · 500ml Drink'], price:'Rs. 1790'},
+        {n:'Deal 4', items:['1 Mayo Burger','5 Pcs Nuggets','1 · 500ml Drink'], price:'Rs. 720'},
+        {n:'Deal 5', items:['1 Large Pizza (any regular)','5 Pcs Wings','1 · 1.5 Ltr Drink'], price:'Rs. 1890'},
+        {n:'Deal 6', items:['2 Zinger Burger','2 Medium Fries','1 · 500ml Drink'], price:'Rs. 1270'},
+        {n:'Deal 7', items:['1 Extreme Large','5 Pcs Fried Wing','1 · 1.5 Ltr Drink'], price:'Rs. 2480'},
+        {n:'Deal 8', items:['2 Medium Pizza (any regular)','5 Pcs Grill Wings','1 · 1.5 Ltr Drink'], price:'Rs. 2670'},
+        {n:'Deal 9', items:['1 Kabab Crust Large Pizza','5 Pcs Grill Wings','1 · 1.5 Ltr Drink'], price:'Rs. 2370'},
+        {n:'Family Deal', items:['2 Large Pizza (mix flavor)','2 Zinger Burger','2 Large Fries','5 Pcs Grill Wing','1.5 Ltr Drink'], price:'Rs. 5840'},
+      ];
+      return deals.map(d=>`
+        <div class="deal-card">
+          <div class="dh"><b>${d.n}</b><span class="price">${d.price}</span></div>
+          <ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+          <button class="buy-btn deal-buy" data-name="${escapeAttr(d.n)}" data-price="${parsePrice(d.price)}">+ Order this deal<span class="qty-badge"></span></button>
+        </div>`).join('');
+    }
+  },
+  {
+    id:'pizza', label:'Pizza', icon:'🍕', sub:'Regular, Special, Crust Club',
+    render:()=>{
+      const regular = {cols:['S-7"','M-10"','L-13"','XL-18"'], rows:[
+        ['Chicken Tikka',690,1090,1550,2370],
+        ['Chicken Fajita',690,1090,1550,2370],
+        ['Pepperoni',690,1090,1550,2370],
+      ]};
+      const special = {cols:['M-10"','L-13"'], rows:[
+        ['Chicken Supreme',1380,1860],
+        ['Kababish',1380,1860],
+        ['Bone Fire',1250,1400],
+        ['Extreme',1490,1990],
+        ['Signature','-',2200],
+      ]};
+      const crust = {cols:['M-10"','L-13"','XL-18"'], rows:[
+        ['Crown Crust',1500,2000,'-'],
+        ['Kabab Crust',1380,1860,2680],
+        ['Cheese Crust',1380,1860,2680],
+        ['Malai Boti',1490,1990,'-'],
+      ]};
+      const table = (t)=>`<table class="sized-table"><thead><tr><th></th>${t.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
+        ${t.rows.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map((p,i)=>tableBuyCell(r[0],t.cols[i],p)).join('')}</tr>`).join('')}
+      </tbody></table>`;
+      return `
+        <div class="grp-title">Regular</div>${table(regular)}
+        <div class="grp-title">Legend Special</div>${table(special)}
+        <div class="grp-title">Crust Club</div>${table(crust)}
+        <div class="grp-title">Extra Toppings</div>
+        <div class="item-row"><span class="item-name">Small</span><span class="item-price">Rs. 80</span></div>
+        <div class="item-row"><span class="item-name">Medium</span><span class="item-price">Rs. 150</span></div>
+        <div class="item-row"><span class="item-name">Large</span><span class="item-price">Rs. 200</span></div>
+      `;
+    }
+  },
+  {
+    id:'burgers', label:'Burgers', icon:'🍔', sub:'Zinger to Mighty Grill',
+    render:()=> simpleList([
+      ['Zinger Burger',480],['Mighty & Cheesy',650],['Chicken Mayo',290],
+      ['Classic Grill',550],['Flame Grill Jalapeno',600],['Mighty Grill',710],
+      ['Chapali Burger',300],['Egg Chicken Cheese',310],
+    ])
+  },
+  {
+    id:'beef', label:'Beef Burger', icon:'🥩', sub:'New Arrivals',
+    render:()=> simpleList([
+      ['Smash Beef',700,'Smash Beef (120gm), Lettuce, Tomato Slice, Onion Rings, BBQ Sauce, Cheese Slice, Pickles'],
+      ['Smash Beef Jalapeno',1150,'Smash Beef (240gm), Lettuce, Tomato Slice, Onion Rings, BBQ Sauce, 2 Cheese Slice, Pickles, Jalapenos'],
+    ])
+  },
+  {
+    id:'broust', label:'Broust', icon:'🍗', sub:'Quarter · Half · Full',
+    render:()=> simpleList([
+      ['Quarter Broast',750,'1 Fried Chicken Leg + 1 Thigh, 1 Bun + Fries + 1 Dip'],
+      ['Half Broast',1390,'2 Leg + 2 Thigh, 2 Bun + Fries + 1 Dip'],
+      ['Full Broast',2490,'4 Leg + 4 Thigh, 4 Bun + Fries + 2 Dip'],
+    ])
+  },
+  {
+    id:'fried', label:'Fried & Fries', icon:'🍟', sub:'Wings, Nuggets, Fries',
+    render:()=>{
+      const t = {cols:['5 Pcs','10 Pcs'], rows:[
+        ['Wings',350,700],['Grill Wing',390,750],['Nuggets',380,760],
+      ]};
+      const t2 = {cols:['M','L'], rows:[
+        ['Garlic Mayo',350,450],['Classic',250,350],['Loaded','-',590],
+      ]};
+      const table = (t)=>`<table class="sized-table"><thead><tr><th></th>${t.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
+        ${t.rows.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map((p,i)=>tableBuyCell(r[0],t.cols[i],p)).join('')}</tr>`).join('')}
+      </tbody></table>`;
+      return table(t)+table(t2)+ simpleList([['Salsa Chicken',1400]]);
+    }
+  },
+  {
+    id:'shawarma', label:'Shawarma & Wrap', icon:'🌯', sub:'8 flavors',
+    render:()=> simpleList([
+      ['Malai Boti',700],['Special',280],['Zinger',480],['Arabic',320],
+      ['Grilled',320],['Platter',830],['Jalapeno Rush',600],['Twister',580],
+    ])
+  },
+  {
+    id:'paratha', label:'Paratha Roll', icon:'🌮', sub:'Tikka · Fajita · Cheese',
+    render:()=> simpleList([['Tikka',290],['Fajita',290],['Cheese',330]])
+  },
+  {
+    id:'sandwich', label:'Sandwich', icon:'🥪', sub:'Malena · Club',
+    render:()=> simpleList([['Malena',600],['Club',550]])
+  },
+  {
+    id:'chips', label:'Chicken Chips', icon:'🍗', sub:'Grilled · Crispy · Salad',
+    render:()=> simpleList([['Grilled Chicken',770],['Crispy Chicken',770],['Salad Bowl',670]])
+  },
+  {
+    id:'steaks', label:'Steaks', icon:'🥩', sub:'Mushroom · Extreme · Mexican',
+    render:()=> simpleList([['Mushroom',1600],['Extreme Mash Up',1600],['Mexican',1650]])
+  },
+  {
+    id:'pasta', label:'Pasta', icon:'🍝', sub:'Alfredo · Special',
+    render:()=> simpleList([['Alfredo',690],['Special',690]])
+  },
+  {
+    id:'chinese', label:'Chinese', icon:'🥡', sub:'Rice · Manchurian · Nuts',
+    render:()=> simpleList([['Egg Fried Rice',450],['Chicken Manchurian',750],['Cashew Nuts',1050]])
+  },
+  {
+    id:'shakes', label:'Shakes', icon:'🥤', sub:'4 signature flavors',
+    render:()=> simpleList([['Death by Brownie',470],['Oreolicious',470],['Cookie Monster',470],['Cold Coffee',470]])
+  },
+  {
+    id:'deserts', label:'Deserts', icon:'🍰', sub:'Mountain Lava · Waffle',
+    render:()=> simpleList([['Mountain Lava',550],['Brownie',380],['Waffle',450],['Ice Cream Cup (3 Scoop)',250]])
+  },
+  {
+    id:'beverages', label:'Beverages', icon:'🧃', sub:'Water, Chai, Coolers',
+    render:()=> simpleList([
+      ['1.5 Ltr',200],['500 ml',120],['345 ml',80],['1.5 Ltr Water',120],['500 ml Water',60],
+      ['Special Legends Chai',120],['Mint Margarita',250],['Blue Lime',250],['Strawberry Lime',250],
+    ])
+  },
+  {
+    id:'winter', label:'Winter Special', icon:'☕', sub:'Hot Coffee · Soup',
+    render:()=> simpleList([['Hot Coffee',280],['French Vanilla',300],['Chick Soup','-']])
+  },
+];
+
+function simpleList(rows){
+  return rows.map(r=>{
+    const [name, price, desc] = r;
+    const priceLabel = price==='-' ? '-' : 'Rs. '+price;
+    const buyBtn = price==='-' ? '' : `<button class="buy-btn" data-name="${escapeAttr(name)}" data-price="${price}">+ Buy<span class="qty-badge"></span></button>`;
+    return `<div class="item-row">
+      <div><div class="item-name">${name}</div>${desc?`<div class="item-desc">${desc}</div>`:''}</div>
+      <div class="item-right"><div class="item-price">${priceLabel}</div>${buyBtn}</div>
+    </div>`;
+  }).join('');
+}
+
+function escapeAttr(str){
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function parsePrice(str){
+  const m = String(str).match(/[\d,]+/);
+  return m ? Number(m[0].replace(/,/g,'')) : 0;
+}
+function tableBuyCell(itemName, sizeLabel, price){
+  if(price==='-') return `<td class="price">-</td>`;
+  const fullName = `${itemName} (${sizeLabel})`;
+  return `<td class="price"><button class="buy-btn table-buy" data-name="${escapeAttr(fullName)}" data-price="${price}">Rs.${price}<span class="buy-plus">+</span><span class="qty-badge"></span></button></td>`;
+}
+
+const grid = document.getElementById('catGrid');
+CATS.forEach(cat=>{
+  const btn = document.createElement('button');
+  btn.className = 'cat-btn' + (cat.deal ? ' deal' : '');
+  btn.innerHTML = `<span class="c-ic">${cat.icon}</span><span class="c-txt"><b>${cat.label}</b><small>${cat.sub}</small></span>`;
+
+  const panel = document.createElement('div');
+  panel.className = 'panel';
+  const panelHtml = cat.render();
+  panel.innerHTML = `<div class="panel-inner">${panelHtml}</div>`;
+
+  const tmp = document.createElement('div');
+  tmp.innerHTML = panelHtml;
+  btn.dataset.search = (cat.label + ' ' + cat.sub + ' ' + tmp.textContent).toLowerCase();
+
+  btn.addEventListener('click', ()=>{
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.panel').forEach(p=>p.style.maxHeight = null);
+    if(!isOpen){
+      btn.classList.add('open');
+      panel.style.maxHeight = panel.scrollHeight + 40 + 'px';
+      setTimeout(()=>btn.scrollIntoView({behavior:'smooth', block:'start'}), 120);
+    }
+  });
+
+  grid.appendChild(btn);
+  grid.appendChild(panel);
+});
+
+// ---------- SEARCH ----------
+const searchInput = document.getElementById('menuSearch');
+const searchClear = document.getElementById('searchClear');
+const searchEmpty = document.getElementById('searchEmpty');
+
+searchInput.addEventListener('input', ()=>{
+  const q = searchInput.value.trim().toLowerCase();
+  searchClear.style.display = q ? 'block' : 'none';
+  const btns = Array.from(document.querySelectorAll('.cat-btn'));
+  let visibleCount = 0;
+  btns.forEach(btn=>{
+    const panel = btn.nextElementSibling;
+    const match = !q || (btn.dataset.search || '').includes(q);
+    btn.classList.toggle('hidden-by-search', !match);
+    panel.classList.toggle('hidden-by-search', !match);
+    if(match) visibleCount++;
+    if(!match && btn.classList.contains('open')){
+      btn.classList.remove('open');
+      panel.style.maxHeight = null;
+    }
+  });
+  searchEmpty.style.display = (q && visibleCount === 0) ? 'block' : 'none';
+});
+searchClear.addEventListener('click', ()=>{
+  searchInput.value = '';
+  searchInput.dispatchEvent(new Event('input'));
+});
+
+// Share via WhatsApp
+const shareText = encodeURIComponent(
+  "🍕 LEGEND CAFE — Kasur\nPizza • Burger • Steaks • Shakes\n📍 Kot Gulam M., Near Sardar Faisal House, Kasur\n📞 0327-4428800 / 0325-4428800\n🛵 Free Home Delivery\n\nCheck out our full digital menu:\n" + window.location.href
+);
+function openShare(e){ e.preventDefault(); window.open('https://wa.me/?text=' + shareText, '_blank'); }
+document.getElementById('shareTop').addEventListener('click', openShare);
+document.getElementById('shareBottom').addEventListener('click', openShare);
+
+// ---------- CART / ORDER SYSTEM ----------
+const ORDER_PHONE = '923274428800';
+const CART_KEY = 'legendCafeCart_v1';
+const CUSTOMER_KEY = 'legendCafeCustomer_v1';
+
+let cart = loadCart();
+let orderType = 'Delivery';
+const TAX_RATE = 0.08;
+
+function loadCart(){
+  try{
+    const raw = localStorage.getItem(CART_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function saveCart(){
+  try{ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }catch(e){}
+}
+function loadCustomer(){
+  try{
+    const raw = localStorage.getItem(CUSTOMER_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function saveCustomer(){
+  try{
+    localStorage.setItem(CUSTOMER_KEY, JSON.stringify({
+      name: document.getElementById('custName').value,
+      phone: document.getElementById('custPhone').value,
+      address: document.getElementById('custAddress').value,
+      orderType,
+    }));
+  }catch(e){}
+}
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> toast.classList.remove('show'), 1600);
+}
+
+function addToCart(name, price, btn){
+  price = Number(price) || 0;
+  if(!cart[name]) cart[name] = { name, price, qty:0 };
+  cart[name].qty += 1;
+  saveCart();
+  renderCart();
+  if(btn){
+    btn.classList.remove('pulse');
+    void btn.offsetWidth; // restart animation
+    btn.classList.add('pulse');
+    setTimeout(()=> btn.classList.remove('pulse'), 400);
+  }
+  showToast(`✓ Added "${name}" to cart`);
+}
+
+function changeQty(name, delta){
+  if(!cart[name]) return;
+  cart[name].qty += delta;
+  if(cart[name].qty <= 0) delete cart[name];
+  saveCart();
+  renderCart();
+}
+
+function removeFromCart(name){
+  delete cart[name];
+  saveCart();
+  renderCart();
+}
+
+function clearCart(){
+  cart = {};
+  saveCart();
+  renderCart();
+}
+
+function cartItemsArray(){ return Object.values(cart); }
+function cartSubtotal(){ return cartItemsArray().reduce((sum, i) => sum + i.price * i.qty, 0); }
+function cartTax(){ return Math.round(cartSubtotal() * TAX_RATE); }
+function cartTotal(){ return cartSubtotal() + cartTax(); }
+function cartCount(){ return cartItemsArray().reduce((sum, i) => sum + i.qty, 0); }
+
+function updateBuyButtonBadges(){
+  document.querySelectorAll('.buy-btn').forEach(btn=>{
+    const name = btn.dataset.name;
+    const badge = btn.querySelector('.qty-badge');
+    if(!badge) return;
+    const qty = cart[name] ? cart[name].qty : 0;
+    if(qty > 0){
+      badge.textContent = qty;
+      badge.style.display = 'flex';
+      btn.classList.add('in-cart');
+    } else {
+      badge.textContent = '';
+      badge.style.display = 'none';
+      btn.classList.remove('in-cart');
+    }
+  });
+}
+
+function renderCart(){
+  const items = cartItemsArray();
+  const inner = document.getElementById('cartBarInner');
+  const list = document.getElementById('cartList');
+  const countTxt = document.getElementById('cartCountTxt');
+  const totalTxt = document.getElementById('cartTotalTxt');
+  const badge = document.getElementById('cartBadge');
+  const orderBtn = document.getElementById('cartOrderBtn');
+  const summary = document.getElementById('orderSummary');
+
+  updateBuyButtonBadges();
+
+  if(items.length === 0){
+    inner.classList.add('empty');
+    inner.classList.remove('expanded');
+    list.innerHTML = '';
+    badge.style.display = 'none';
+    countTxt.textContent = 'Your cart is empty';
+    totalTxt.textContent = 'Tap "+ Buy" on any item to start';
+    orderBtn.disabled = true;
+    summary.style.display = 'none';
+    return;
+  }
+  inner.classList.remove('empty');
+  summary.style.display = 'block';
+  orderBtn.disabled = false;
+
+  badge.style.display = 'flex';
+  badge.textContent = cartCount();
+  countTxt.textContent = cartCount() + (cartCount() === 1 ? ' item in cart' : ' items in cart');
+  totalTxt.textContent = 'Rs. ' + cartTotal() + ' • tap to view order';
+
+  list.innerHTML = items.map(i => `
+    <div class="cart-line">
+      <div>
+        <div class="cl-name">${i.name}</div>
+        <div class="cl-price">Rs. ${i.price} x ${i.qty} = Rs. ${i.price * i.qty}</div>
+      </div>
+      <div class="cl-qty">
+        <button class="qty-minus" data-name="${escapeAttr(i.name)}">−</button>
+        <span>${i.qty}</span>
+        <button class="qty-plus" data-name="${escapeAttr(i.name)}">+</button>
+      </div>
+      <button class="cl-remove" data-name="${escapeAttr(i.name)}" title="Remove">✕</button>
+    </div>
+  `).join('');
+
+  document.getElementById('osSubtotal').textContent = 'Rs. ' + cartSubtotal();
+  document.getElementById('osTax').textContent = 'Rs. ' + cartTax();
+  document.getElementById('osTotal').textContent = 'Rs. ' + cartTotal();
+
+  const cartScroll = document.getElementById('cartScroll');
+  const maxScrollHeight = Math.floor(window.innerHeight * 0.78) - 120;
+  cartScroll.style.maxHeight = Math.max(180, maxScrollHeight) + 'px';
+}
+
+function buildOrderMessage(){
+  const items = cartItemsArray();
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+  const notes = document.getElementById('custNotes').value.trim();
+
+  let msg = `🍕 *New Order — Legend Cafe*\n\n`;
+  msg += `👤 Name: ${name}\n📞 Phone: ${phone}\n🛵 Order Type: ${orderType}\n`;
+  if(orderType === 'Delivery') msg += `📍 Address: ${address}\n`;
+  msg += `\n*Items:*\n`;
+  items.forEach((i, idx) => {
+    msg += `${idx+1}. ${i.name} x${i.qty} — Rs. ${i.price * i.qty}\n`;
+  });
+  msg += `\nSubtotal: Rs. ${cartSubtotal()}\nTax (8%): Rs. ${cartTax()}\n*Total: Rs. ${cartTotal()}*\n`;
+  if(notes) msg += `\n📝 Notes: ${notes}\n`;
+  msg += `\nPlease confirm my order and estimated time. Thank you!`;
+  return msg;
+}
+
+// Click delegation: buy buttons, qty controls, remove, order-type toggle
+document.addEventListener('click', (e) => {
+  const buyBtn = e.target.closest('.buy-btn');
+  if(buyBtn){
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(buyBtn.dataset.name, buyBtn.dataset.price, buyBtn);
+    return;
+  }
+  const minusBtn = e.target.closest('.qty-minus');
+  if(minusBtn){ changeQty(minusBtn.dataset.name, -1); return; }
+  const plusBtn = e.target.closest('.qty-plus');
+  if(plusBtn){ changeQty(plusBtn.dataset.name, 1); return; }
+  const removeBtn = e.target.closest('.cl-remove');
+  if(removeBtn){ removeFromCart(removeBtn.dataset.name); return; }
+  const otBtn = e.target.closest('.ot-btn');
+  if(otBtn){
+    document.querySelectorAll('.ot-btn').forEach(b=>b.classList.remove('active'));
+    otBtn.classList.add('active');
+    orderType = otBtn.dataset.type;
+    document.getElementById('addressGroup').style.display = (orderType === 'Delivery') ? 'block' : 'none';
+    return;
+  }
+});
+
+document.getElementById('cartSummary').addEventListener('click', () => {
+  const inner = document.getElementById('cartBarInner');
+  if(cartItemsArray().length === 0) return;
+  inner.classList.toggle('expanded');
+});
+
+document.getElementById('cartClearBtn').addEventListener('click', () => {
+  if(confirm('Remove all items from your order?')) clearCart();
+});
+
+document.getElementById('cartOrderBtn').addEventListener('click', () => {
+  if(cartItemsArray().length === 0){
+    showToast('Add at least one item first');
+    return;
+  }
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+
+  if(!name){ showToast('Please enter your name'); document.getElementById('custName').focus(); return; }
+  if(!phone){ showToast('Please enter your phone number'); document.getElementById('custPhone').focus(); return; }
+  if(orderType === 'Delivery' && !address){ showToast('Please enter delivery address'); document.getElementById('custAddress').focus(); return; }
+
+  saveCustomer();
+  const text = encodeURIComponent(buildOrderMessage());
+  window.open(`https://wa.me/${ORDER_PHONE}?text=${text}`, '_blank');
+});
+
+// Restore saved customer details (professional touch — no retyping next visit)
+(function restoreCustomer(){
+  const saved = loadCustomer();
+  if(saved.name) document.getElementById('custName').value = saved.name;
+  if(saved.phone) document.getElementById('custPhone').value = saved.phone;
+  if(saved.address) document.getElementById('custAddress').value = saved.address;
+  if(saved.orderType && saved.orderType !== 'Delivery'){
+    document.querySelectorAll('.ot-btn').forEach(b=>b.classList.toggle('active', b.dataset.type === saved.orderType));
+    orderType = saved.orderType;
+    document.getElementById('addressGroup').style.display = (orderType === 'Delivery') ? 'block' : 'none';
+  }
+})();
+
+renderCart();
+</script>
+</body>
+</html>
